@@ -9,7 +9,7 @@
   "author": "Temirlan Safargaliyev (thesafatem)",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^9.2.6"
+    "inquirer": "^8.0.0"
   },
   "devDependencies": {
     "@types/inquirer": "^9.0.3"
