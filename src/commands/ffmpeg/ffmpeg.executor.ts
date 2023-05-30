@@ -1,4 +1,4 @@
-import { ChildProcessWithoutNullStreams } from 'child_process';
+import { ChildProcessWithoutNullStreams, spawn } from 'child_process';
 import { CommandExecutor } from '../../core/executor/command.executor';
 import { ICommandExec } from '../../core/executor/command.types';
 import { IStreamLogger } from '../../core/handlers/stream-logger.interface';
@@ -6,6 +6,7 @@ import { PromptService } from '../../core/prompt/prompt.service';
 import { FfmpegBuilder } from './ffmpeg.builder';
 import { ICommandExecFfmpeg, IFfmpegInput } from './ffmpeg.types';
 import { FileService } from '../../core/files/file.service';
+import { StreamHandler } from '../../core/handlers/stream.handler';
 
 export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
 	private fileService: FileService = new FileService();
@@ -19,7 +20,7 @@ export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
 		const width = await this.promptService.input<number>('Width', 'number');
 		const height = await this.promptService.input<number>('Height', 'number');
 		const path = await this.promptService.input<string>('Path', 'input');
-		const name = await this.promptService.input<string>('Name', 'number');
+		const name = await this.promptService.input<string>('Name', 'input');
 		return { width, height, path, name };
 	}
 
@@ -38,6 +39,7 @@ export class FfmpegExecutor extends CommandExecutor<IFfmpegInput> {
 	}
 
 	protected processStream(stream: ChildProcessWithoutNullStreams, logger: IStreamLogger): void {
-		throw new Error('Method not implemented.');
+		const handler = new StreamHandler(logger);
+		handler.processOutput(stream);
 	}
 }
