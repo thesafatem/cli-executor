@@ -12,7 +12,6 @@ export class FileService {
 	}
 
 	public getFilePath(path: string, name: string, extension: string): string {
-		// return '/Users/thesa/Videos/Captures/vidos.mp4';
 		if (!isAbsolute(path)) {
 			path = join(__dirname + '/' + path);
 		}
