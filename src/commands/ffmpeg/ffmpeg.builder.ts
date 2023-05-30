@@ -6,7 +6,7 @@ export class FfmpegBuilder {
 		this.options.set('-c:v', 'libx264');
 	}
 
-	addResolution(width: number, height: number): this {
+	setSize(width: number, height: number): this {
 		this.options.set('-s', `${width}x${height}`);
 		return this;
 	}
